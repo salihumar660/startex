@@ -177,6 +177,8 @@
                     url: "edit-driver-order/" + orderId,
                     success: function(response) {
 
+                        console.log(response);
+                        
                         if (response.status === 'success') {
                             alert('Order status updated to Complete.');
 

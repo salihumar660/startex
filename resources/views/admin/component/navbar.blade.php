@@ -134,6 +134,28 @@
                         <span class="nav-text">Purchase Sale</span>
                     </a>
                 </li>
+                <li class="dropdown">
+                    <a href="#" aria-expanded="false" style="color:white !important;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true">
+                        <i class="fa-solid fa-bell" style="color:white !important;"></i>
+                        <span class="nav-text">Notifications</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('driver.notification') }}" style="color:#333333 !important;">
+                                <i class="fa-solid fa-truck" style="color:#333333 !important;"></i> Driver Notifications
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('customer.notification') }}" style="color:#333333 !important;">
+                                <i class="fa-solid fa-users" style="color:#333333 !important;"></i> Customer Notifications
+                            </a>
+                        </li>
+                    </ul>
+               </li>
+                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 
             @elseif ($roleId == 3)
@@ -183,6 +205,12 @@
                     <a href="{{ url('/split-load') }}" aria-expanded="false" style="color:white !important;">
                         <i class="fa-solid fa-truck-ramp-box" style="color:white !important;"></i>
                         <span class="nav-text">Load</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.notification') }}" aria-expanded="false" style="color:white !important;">
+                        <i class="fa-solid fa-bell" style="color:white !important;"></i>
+                        <span class="nav-text">Admin Notifications</span>
                     </a>
                 </li>
 

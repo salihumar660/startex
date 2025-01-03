@@ -60,4 +60,13 @@ class User extends Authenticatable
     public function customerDetail() {
         return $this->hasOne(CustomerDetail::class, 'user_id');
     }
+    //Relationship with notification
+    public function sentNotifications()
+    {
+        return $this->hasMany(Notification::class, 'sender_id');
+    }
+    public function receivedNotifications()
+    {
+        return $this->hasMany(Notification::class, 'receiver_id');
+    }
 }

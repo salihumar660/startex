@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Notification;
 
 class OrderAssignController extends Controller
 {
@@ -182,13 +183,16 @@ class OrderAssignController extends Controller
         }
         $driver = User::find($req->driver_id);
 
+        $notification = new Notification();
+        $notification->sender_id = Auth::user()->id; // Logged-in user
+        $notification->receiver_id = $req->driver_id; // Selected driver
+        $notification->status = 'unread'; // Default status
+        $notification->text = "You have been assigned a new order. Please check DriverOrder module."; // Custom message
+        $notification->save();
 
 
         return redirect()->back();
     }
-
-
-
 
     public function editOrderStatus($id){
 

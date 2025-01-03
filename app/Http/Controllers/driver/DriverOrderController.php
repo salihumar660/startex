@@ -10,6 +10,7 @@ use App\Models\Inventory;
 use App\Models\SplitLoad;
 use App\Models\DriverAssign;
 use App\Models\DriverTicket;
+use App\Models\Notification; 
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -48,6 +49,17 @@ class DriverOrderController extends Controller
             $assign->status = 'Delivered';
             $assign->save();
 
+            //notification record insertion
+            $receiverId = User::where('role_id', 2)->first()->id; 
+            Notification::insert([
+                'sender_id' => $userId, 
+                'receiver_id' => $receiverId,
+                'text' => 'A new order has been placed by ' . Auth::user()->name,
+                'status' => 'unread',
+                'created_at' => now()
+            ]);   
+               
+
             $existingRecord = SplitLoad::where('driver_id', $userId)
                 ->whereDate('date', now()->toDateString())
                 ->first();
@@ -62,7 +74,7 @@ class DriverOrderController extends Controller
                     'message' => 'No split load record found for today.',
                 ], 404);
             }
-
+              
             return response()->json([
                 'status' => 'success',
                 'message' => 'Order status updated to Complete.',

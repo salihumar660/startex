@@ -21,6 +21,7 @@ use App\Http\Controllers\SubAdmin\AttendanceController;
 use App\Http\Controllers\SubAdmin\OrderAssignController;
 use App\Http\Controllers\SubAdmin\PurchaseSaleController;
 use App\Http\Controllers\SubAdmin\DriverPaymentController;
+use App\Http\Controllers\SubAdmin\NotificationController;
 use App\Http\Controllers\Supplier\OrderApprovalController;
 use App\Http\Controllers\Admin\InventoryCategoryController;
 use App\Http\Controllers\SubAdmin\AdminSplitLoadController;
@@ -309,6 +310,19 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/purchase-sale-list', [PurchaseSaleController::class, 'getpurchaseSale'])->name('purchaseSale.list');
 
 
+
+    //================ Driver Notification
+    Route::get('/driver-notifications', [NotificationController::class, 'driverNotification'])->name('driver.notification');
+
+    //================ Admin Read Notification
+    Route::put('/read-notifications/{id}', [NotificationController::class, 'notificationRead'])->name('read.notification');
+
+    //================ Driver Notification
+    Route::get('/customer-notifications', [NotificationController::class, 'customerNotification'])->name('customer.notification');
+
+
+    //================ Admin to Driver Notifications
+    Route::get('/admin-notifications', [NotificationController::class, 'adminNotification'])->name('admin.notification');
 
 
 

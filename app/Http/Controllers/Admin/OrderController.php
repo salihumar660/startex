@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Invoice;
+use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -92,6 +94,16 @@ class OrderController extends Controller
             'type_of_oil' => implode(',', $oilTypes), // Comma-separated oil types
             'gallon' => implode(',', $gallons), // Comma-separated gallons
             'status' => 'pending',
+        ]);
+
+        //notification record insertion
+        $receiverId = User::where('role_id', 2)->first()->id;
+        Notification::insert([
+            'sender_id' => Auth::id(),  
+            'receiver_id' => $receiverId,         
+            'text' => 'A new order has been placed by ' . Auth::user()->name,
+            'status' => 'unread',     
+            'created_at' => now()   
         ]);
 
         return redirect()->back()->with('success', 'Order created successfully.');
